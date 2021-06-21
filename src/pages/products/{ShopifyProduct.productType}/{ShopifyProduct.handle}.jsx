@@ -37,6 +37,7 @@ export default function Product({ data: { product, suggestions } }) {
     priceRangeV2,
     title,
     description,
+    descriptionHtml,
     images,
     images: [firstImage],
   } = product
@@ -132,7 +133,7 @@ export default function Product({ data: { product, suggestions } }) {
                         alt={
                           image.altText
                             ? image.altText
-                            : `Product Image of ${title} #${index + 1}`
+                            : `Imagen de producto de ${title} #${index + 1}`
                         }
                         image={image.gatsbyImageData}
                       />
@@ -157,7 +158,10 @@ export default function Product({ data: { product, suggestions } }) {
               <ChevronIcon size={12} />
             </div>
             <h1 className={header}>{title}</h1>
-            <p className={productDescription}>{description}</p>
+            <div
+              className={productDescription}
+              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            ></div>
             <h2 className={priceValue}>
               <span>{price}</span>
             </h2>
@@ -169,7 +173,7 @@ export default function Product({ data: { product, suggestions } }) {
                       aria-label="Variants"
                       onChange={(event) => handleOptionChange(index, event)}
                     >
-                      <option value="">{`Select ${name}`}</option>
+                      <option value="">{`Seleccionar ${name}`}</option>
                       {values.map((value) => (
                         <option value={value} key={`${name}-${value}`}>
                           {value}
@@ -215,10 +219,11 @@ export default function Product({ data: { product, suggestions } }) {
 }
 
 export const query = graphql`
-  query($id: String!, $productType: String!) {
+  query ($id: String!, $productType: String!) {
     product: shopifyProduct(id: { eq: $id }) {
       title
       description
+      descriptionHtml
       productType
       productTypeSlug: gatsbyPath(
         filePath: "/products/{ShopifyProduct.productType}"
