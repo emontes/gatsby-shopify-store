@@ -195,7 +195,7 @@ h4,
 h5,
 h6 {
   font-size: inherit;
-  font-weight: inherit;
+  font-weight: bold;
 }
 button,
 input,
@@ -223,4 +223,7 @@ video {
 }
 select::-ms-expand {
   display: none;
+}
+h2 {
+  font-size: 1.25rem;
 }
