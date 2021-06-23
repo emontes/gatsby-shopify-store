@@ -15,12 +15,8 @@ import {
 } from "./line-item.module.css"
 
 export function LineItem({ item }) {
-  const {
-    removeLineItem,
-    checkout,
-    updateLineItem,
-    loading,
-  } = React.useContext(StoreContext)
+  const { removeLineItem, checkout, updateLineItem, loading } =
+    React.useContext(StoreContext)
   const [quantity, setQuantity] = React.useState(item.quantity)
 
   const variantImage = {
@@ -97,7 +93,7 @@ export function LineItem({ item }) {
         </div>
         <div className={remove}>
           <button onClick={handleRemove}>
-            <DeleteIcon /> Remove
+            <DeleteIcon /> Borrar
           </button>
         </div>
       </td>
